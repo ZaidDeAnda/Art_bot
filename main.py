@@ -15,7 +15,7 @@ from functions import obtain_palette, url_to_image
 #Ruta de la API del museo metropolitano
 api_route="https://collectionapi.metmuseum.org/public/collection/v1/objects/"
 #Ruta donde guardarás la imagen
-folder_route="C:/Users/Zaid/Desktop/personal stuff/github/Art_bot/prueba.jpg"
+folder_route=""
 #Revisamos que solo nos devuelva obras con imagen pública
 image=''
 while image == '':
@@ -48,10 +48,10 @@ if(size//1024 > 3000):
 print("Imagen modificada de tamaño")
 #Credenciales de twitter
 logger = logging.getLogger()
-consumer_key = "d99GIAomdJYkhISI1c6KYZyfD"
-consumer_secret = "T10zOaYPdfwXpy0Y7O8NuY8PyJcZ5qexD4UiidjUb8seB2pmX5"
-access_token = "3427737434-e2Ho4byvTKikAN1rpIbw8Dl7XHCe0hLBDykQMF8"
-access_token_secret = "KHwiB4H0sucDEjMIvsALzRtBIBuQHnEGBKTKg904Plzo8"
+consumer_key = ""
+consumer_secret = ""
+access_token = ""
+access_token_secret = ""
 
 #Creamos nuestra API con twitter
 def create_api():
