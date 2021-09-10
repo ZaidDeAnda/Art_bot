@@ -14,6 +14,7 @@ import os
 def obtain_palette(img_path):
   original_image=cv2.imread(img_path)
   colors = colorgram.extract(img_path, 7)
+  print(colors)
   dominant_color=colors[1].rgb
   palette=colors[0],colors[2],colors[3],colors[4],colors[5],colors[6]
   dominant_color=[x for x in dominant_color]

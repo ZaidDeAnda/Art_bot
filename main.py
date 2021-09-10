@@ -15,7 +15,7 @@ from functions import obtain_palette, url_to_image
 #Ruta de la API del museo metropolitano
 api_route="https://collectionapi.metmuseum.org/public/collection/v1/objects/"
 #Ruta donde guardarás la imagen
-folder_route=""
+folder_route="C:/Users/Zaid/Desktop/personal stuff/github/Art_bot/prueba.jpg"
 #Revisamos que solo nos devuelva obras con imagen pública
 image=''
 while image == '':
@@ -48,10 +48,10 @@ if(size//1024 > 3000):
 print("Imagen modificada de tamaño")
 #Credenciales de twitter
 logger = logging.getLogger()
-consumer_key = ""
-consumer_secret = ""
-access_token = ""
-access_token_secret = ""
+consumer_key = "d99GIAomdJYkhISI1c6KYZyfD"
+consumer_secret = "T10zOaYPdfwXpy0Y7O8NuY8PyJcZ5qexD4UiidjUb8seB2pmX5"
+access_token = "3427737434-e2Ho4byvTKikAN1rpIbw8Dl7XHCe0hLBDykQMF8"
+access_token_secret = "KHwiB4H0sucDEjMIvsALzRtBIBuQHnEGBKTKg904Plzo8"
 
 #Creamos nuestra API con twitter
 def create_api():
@@ -71,6 +71,10 @@ api = create_api()
 #Loggeado en twitter
 author=request.json()["artistDisplayName"]
 painting_name=request.json()["title"]
-message=f"Paleta de colores para {painting_name} - {author} \n Publicado por un bot 🤖 \n Color Principal: {dominant_color}"
-api.update_with_media(folder_route, status=message)
-print(Tweet publicado!)
+try:
+  message=f"{painting_name} - {author} \n Publicado por un bot 🤖\n Color Principal: {dominant_color}"
+  api.update_with_media("prueba.jpg", status=message)
+except:
+  message=f"{painting_name} - {author} \n Publicado por un bot 🤖\n Color Principal: {dominant_color}\n Colores secundarios: {color_palette[0], color_palette[1], color_palette[2], color_palette[3], color_palette[4], color_palette[5]}"
+  api.update_with_media("prueba.jpg", status=message)
+print("Tweet publicado!")
