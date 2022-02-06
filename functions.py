@@ -109,4 +109,5 @@ def obtain_image():
   print("imagen recibida")
   palette_im, dominant_color, color_palette = obtain_palette("prueba.jpg")
   print("imagen procesada")
+  cv2.imwrite("prueba.jpg", palette_im)
   return palette_im, dominant_color, color_palette, request.json()
