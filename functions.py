@@ -63,3 +63,50 @@ def url_to_image(url):
   image = cv2.imdecode(image, cv2.IMREAD_COLOR)
   # regresamos la imagen
   return image
+
+def obtain_image():
+  #Ruta de la API del museo metropolitano
+  api_route="https://collectionapi.metmuseum.org/public/collection/v1/objects/"
+  #Revisamos que solo nos devuelva obras con imagen pública
+  image=''
+  while image is '':
+    #Obtenemos una obra de arte al azar
+    object_id=random.randint(0,475947)
+    request = requests.get(api_route+str(object_id))
+    #Solo la publicamos si es una pintura
+    try:
+      if request.json()['objectName'] == "Painting":
+        image=request.json()['primaryImage']
+    except:
+      pass
+  new_im=url_to_image(image)
+  cv2.imwrite("prueba.jpg", new_im)
+  while len(colorgram.extract("prueba.jpg", 7)) != 7:
+    print("imagen rechazada")
+    #Revisamos que solo nos devuelva obras con imagen pública
+    image=''
+    while image is '':
+      #Obtenemos una obra de arte al azar
+      object_id=random.randint(0,475947)
+      request = requests.get(api_route+str(object_id))
+      #Solo la publicamos si es una pintura
+      try:
+        if request.json()['objectName'] == "Painting":
+          image=request.json()['primaryImage']
+      except:
+        pass
+    new_im=url_to_image(image)
+    cv2.imwrite("prueba.jpg", new_im)
+  #Obtenemos su paleta y la añadimos
+  scale_percent = 0.5 # percent of original size
+  width = int(new_im.shape[1] * scale_percent )
+  height = int(new_im.shape[0] * scale_percent )
+  dim = (width, height)
+  # resize image
+  new_im = cv2.resize(new_im, dim, interpolation = cv2.INTER_AREA)
+  cv2.imwrite("prueba.jpg", new_im)
+  #Obtenemos su paleta y la añadimos
+  print("imagen recibida")
+  palette_im, dominant_color, color_palette = obtain_palette("prueba.jpg")
+  print("imagen procesada")
+  return palette_im, dominant_color, color_palette, request.json()
